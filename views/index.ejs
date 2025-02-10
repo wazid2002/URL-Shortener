@@ -11,7 +11,7 @@
 <body>
     <div class="container">
     <h1>URL Shortner</h1>
-    <form action="/shortUrls" method="post" class="my-4 form-inline">
+    <form action="/shortUrls" method="POST" class="my-4 form-inline">
         <label for="fullUrl" class="visually-hidden">Url</label>
         <div class="input-group">
         <input required placeholder="URL" type="url" name="fullUrl" id="fullUrl" class=" col mr-2 rounded">
@@ -28,11 +28,15 @@
                     <th>Clicks</th>
                 </tr>
             </thead>
-                <tr>
-                    <td><a href="www.google.com"> www.google.com</a></td>
-                    <td><a href="12345">12345</a></td>
-                    <td>09</td>
-                </tr>
+            <tbody>
+                <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                      <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+                      <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                      <td><%= shortUrl.clicks %></td>
+                    </tr>
+                  <% }) %>
+            </tbody>
         </table>
     </div>
 </div>
