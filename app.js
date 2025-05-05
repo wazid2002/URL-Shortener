@@ -1,10 +1,11 @@
-require('dotenv').config()
-const express= require('express')
-const mongoose=require('mongoose')
-const ShortUrl=require('./models/shortUrl')
-const app=express()
+require('dotenv').config();
+const express= require('express');
+const mongoose=require('mongoose');
+const ShortUrl=require('./models/shortUrl');
+const connectDB= require('./config/db');
+const app=express();
 
-mongoose.connect(process.env.MONGO_URL)
+connectDB();
 
 app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}));
@@ -32,4 +33,6 @@ app.get('/:shortUrl',async(req,res)=>{
 
 
 
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server running on PORT ${process.env.PORT}`);
+});
